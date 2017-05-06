@@ -23,7 +23,7 @@ export default class Watcher {
         dep.addSub(this)
     }
     update () {
-        const val = this.get()
+        const val = this.vm[this.expOrFn]
         if (val !== this.val) {
             const oldVal = this.val
             this.val = val

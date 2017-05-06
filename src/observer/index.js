@@ -6,6 +6,7 @@ export default class Observer {
     constructor (value) {
         this.value = value
         this.walk(value)
+        this.dep = new Dep()
     }
     walk (value) {
         for (let val in value) {
@@ -33,14 +34,20 @@ function defineReactive (obj, val, type) {
         get: function getter () {
             if (Dep.target) {
                 dep.depend()
+                if (childOb) {
+                    childOb.dep.depend()
+                }
             }
             return val
         },
         set: function setter (newVal) {
-            console.log(val)
             if (newVal === val) {
                 return
             }
+            if (childOb) {
+                childOb.dep.notify()
+            }
+            childOb = observe(newVal)
             val = newVal
             dep.notify()
         }

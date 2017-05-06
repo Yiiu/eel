@@ -8,7 +8,7 @@ let plugins = [
     babel({
         exclude: 'node_modules/**'
     }),
-    eslint({ /* your options */ }),
+    // eslint(),
 ]
 if (!process.env.NODE_ENV) {
     plugins.push(uglify())
