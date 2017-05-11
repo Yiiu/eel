@@ -19,7 +19,12 @@ main img {
     </main>
 </body>
 <script type="text/x-template" id="template">
-<div class="test">{{test}}{{a}}</div>
+<div class="test">
+    {{hello}}{{world}} asdfasdf
+    <div v-text="test">
+        {{hello}}
+    </div>
+</div>
 </script>
 <!-- 开发环境请把下面的注释去掉↓ -->
 <script src="http://localhost:35729/livereload.js?snipver=1"></script>
@@ -30,24 +35,9 @@ let a = new eel({
     el: '#el',
     template: '#template',
     data: {
-        test: 1,
-        obj: {
-            a: 2
-        }
-    },
-    watch: {
-        test: function (val, oldVal) {
-            console.log(val, oldVal)
-        }
+        hello: 'hello',
+        world: 'world'
     }
 })
-a.template = function (html, data) {
-    let template = Handlebars.compile(html)
-    template(data)
-}
-a.$watch(a, 'obj', (oldVal, val) => {
-    console.log(oldVal, val)
-})
-console.log(a)
 </script>
 </html>

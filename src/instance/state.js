@@ -13,6 +13,13 @@ export function initState (Eel) {
     initData(Eel)
     Eel._watcher = []
 }
+export function initWatch (Eel) {
+    if (Eel.$option.watch) {
+        Object.keys(Eel.$option.watch).forEach(key => {
+            Eel.$watch(key, Eel.$option.watch[key])
+        })
+    }
+}
 
 function _proxy (vm, key) {
     Object.defineProperty(vm, key, {
