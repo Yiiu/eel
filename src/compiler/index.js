@@ -4,7 +4,7 @@
 import { parseDom, before, remove } from '../util/dom'
 
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
-
+const directivesRE = /^v-/g
 export function parseHTML (el) {
     let fragment = document.createDocumentFragment()
     let options = this.$option
@@ -33,6 +33,9 @@ export function compileNode (html) {
 }
 
 export function compileDomNode (dom) {
+    Array.prototype.forEach.call(dom.attributes, attr => {
+        console.dir(attr)
+    })
     Array.from(dom.childNodes).forEach(t => {
         this._compileNode(t)
     })
