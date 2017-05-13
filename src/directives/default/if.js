@@ -7,7 +7,6 @@ export default function (Eel) {
         bind () {
             let val = this.getter()
             let Pla = this._Pla = document.createComment('(●ˇ∀ˇ●)')
-            console.dir(this.el)
             this._el = this.el
             if (!val) {
                 this.hide()

@@ -8,8 +8,7 @@ const directivesRE = /^v-(\w+)/                 // 匹配指令名称
 const dirREM = /v-(.*)/                         // 匹配指令名称后面的值
 export function parseHTML (el) {
     let fragment = document.createDocumentFragment()
-    let options = this.$option
-    let tpl = document.querySelector(options.template).innerHTML
+    let tpl = this.$root.$template
     if (typeof(tpl) === 'string') {
         tpl = parseDom(tpl)
     }

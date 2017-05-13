@@ -17,7 +17,7 @@ export function parseDom (arg) {
 
     objE.innerHTML = arg
     for (let i = 0;i < objE.childNodes.length; i++) {
-        if (objE.childNodes[i].textContent !== '\n') {
+        if (objE.childNodes[i].textContent.trim() !== '\n' && objE.childNodes[i].textContent.trim() !== '') {
             dom.push(objE.childNodes[i])
         }
     }

@@ -15,7 +15,7 @@ function relative (path) {
     return fp.join(__dirname, path)
 }
 
-app.use(express.static(relative('../docs')))
+app.use(express.static(relative('../')))
 app.use('/dist', express.static(relative('../dist')))
 
 app.listen(PORT, function () {
@@ -45,4 +45,4 @@ const eventHandler = (event, filename) => {
 
 
 watcherDefault.on('event', event => eventHandler(event, config.dest))
-lrserver.watch([relative('../dist'), relative('../docs')])
+lrserver.watch([relative('../dist'), relative('../docs'),  relative('../')])
