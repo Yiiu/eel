@@ -28,7 +28,7 @@
             <h3 class="title">You name is:{{input}}</h3>
             <input class="input" type="text" v-model="input">
             <button class="btn" v-on:click="handleClick">Click!</button>
-            <div class="miaow">
+            <div class="miaow" v-if="show">
                 <a href="//www.github.com/yiiu">Yiiu</a>
             </div>
         </main>
@@ -46,9 +46,6 @@
             world: 'world',
             show: false,
             input: '',
-            tests: {
-                a: 2
-            }
         },
         methods: {
             handleClick () {
