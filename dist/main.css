@@ -1,0 +1,64 @@
+body, html, main {
+    height: 100%;
+    margin: 0;
+}
+#el {
+    height: 100%;
+}
+.hello {
+    height: 100%;
+    font-size: 24px;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    text-align: center;
+}
+.hello .title {
+    color: #2c3e50;
+    font-weight: 400;
+    padding: 1px;
+    margin: 0;
+    margin-bottom:12px;
+}
+.hello h1.title {
+    text-align: center;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hello main.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.hello main.content h2.title {
+    text-align: center;
+}
+.hello button.btn {
+    cursor: pointer;
+    display: block;
+    padding: 0.75em 2em;
+    border-radius: 2em;
+    display: inline-block;
+    background-color: #fff;
+    color: #42b983;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+    border: 1px solid #4fc08d;
+    outline: none;
+    margin-bottom: 24px;
+}
+.hello .input {
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-bottom: 24px;
+}
+.hello .miaow a {
+    color: #42b983;
+    text-decoration: none;
+}

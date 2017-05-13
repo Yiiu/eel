@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./dist/main.css">
+</head>
+<style>
+    main {
+        width: 500px;
+        margin: 0 auto;
+    }
+    main img {
+        width: 100%;
+    }
+</style>
+<body>
+<main>
+    <div id="el"></div>
+</main>
+</body>
+<script type="text/x-template" id="template">
+    <div class="hello">
+        <h1 class="title">Eel</h1>
+        <main class="content">
+            <h2 class="title">{{hello}}{{world}}</h2>
+            <h3 class="title">You name is:{{input}}</h3>
+            <input class="input" type="text" v-model="input">
+            <button class="btn" v-on:click="handleClick">Click!</button>
+            <div class="miaow">
+                <a href="//www.github.com/yiiu">Yiiu</a>
+            </div>
+        </main>
+    </div>
+</script>
+<!-- 开发环境请把下面的注释去掉↓ -->
+<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+<script src="/dist/js/eel.js"></script>
+<script>
+    let a = new eel({
+        el: '#el',
+        template: '#template',
+        data: {
+            hello: 'hello',
+            world: 'world',
+            show: false,
+            input: '',
+            tests: {
+                a: 2
+            }
+        },
+        methods: {
+            handleClick () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</html>
