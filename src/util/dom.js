@@ -2,6 +2,14 @@
  * Created by yuer on 2017/5/11.
  */
 
+export function replace (el, tar) {
+    if (el.nextSibling) {
+        el.parentNode.insertBefore(tar, el)
+    } else {
+        el.parentNode.appendChild(tar)
+    }
+    el.parentNode.removeChild(el)
+}
 
 export function parseDom (arg) {
     let dom = []

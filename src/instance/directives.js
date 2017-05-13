@@ -7,7 +7,6 @@ export function initDirectives (vm) {
     vm.__proto__.directives = installDirectives
     vm.$directives = {}
     defaultInstallDirectives(vm)
-    console.log(vm)
 }
 function installDirectives (name, hook) {
     let dir = install(name, hook)

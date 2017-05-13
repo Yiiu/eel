@@ -9,7 +9,7 @@ export function initMixin (Eel) {
         this.$option = options
         initState(this)
         initWatch(this)
-        initCompiler(this)
         initDirectives(this)
+        initCompiler(this)
     }
 }

@@ -9,6 +9,7 @@ export function initCompiler (vm) {
     let t = document.querySelector(vm.$option.template)
     vm.$root.$template = t.innerHTML
     vm.__proto__._parseHTML = parse.parseHTML
+    vm.__proto__._compileDir = parse.compileDir
     vm.__proto__._compileNode = parse.compileNode
     vm.__proto__._compileDomNode = parse.compileDomNode
     vm.__proto__._compileTextNode = parse.compileTextNode

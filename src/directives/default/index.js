@@ -1,8 +1,14 @@
 /**
  * Created by yuer on 2017/5/12.
  */
-import text from './text'
+import Vtext from './text'
+import Vif from './if'
+import Von from './on'
+import Vmodel from './model'
 
 export default function install (Eel) {
-    text(Eel)
+    Vtext(Eel)
+    Vif(Eel)
+    Von(Eel)
+    Vmodel(Eel)
 }

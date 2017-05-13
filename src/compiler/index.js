@@ -2,9 +2,10 @@
  * Created by yuer on 2017/5/6.
  */
 import { parseDom, before, remove } from '../util/dom'
-
-const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
-const directivesRE = /^v-/g
+import Directives from '../directives/index'
+const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g    // tag
+const directivesRE = /^v-(\w+)/                 // 匹配指令名称
+const dirREM = /v-(.*)/                         // 匹配指令名称后面的值
 export function parseHTML (el) {
     let fragment = document.createDocumentFragment()
     let options = this.$option
@@ -32,10 +33,25 @@ export function compileNode (html) {
     }
 }
 
-export function compileDomNode (dom) {
-    Array.prototype.forEach.call(dom.attributes, attr => {
-        console.dir(attr)
+export function compileDir (attr, dom) {
+    let name = directivesRE.exec(attr.name)[1]
+    let tag = dirREM.exec(attr.name)[1]
+    new Directives(name, dom, this, {
+        name: attr.name,
+        tag: tag,
+        val: attr.nodeValue
     })
+}
+
+export function compileDomNode (dom) {
+    Array.prototype
+        .slice
+        .call(dom.attributes)
+        .forEach(attr => {
+            if (directivesRE.test(attr.name)) {
+                this._compileDir(attr, dom)
+            }
+        })
     Array.from(dom.childNodes).forEach(t => {
         this._compileNode(t)
     })
@@ -49,9 +65,8 @@ export function compileTextNode (text) {
         if (tags.tag) {
             let value = tags.value
             let el = document.createTextNode('')
-            el.textContent = this[value]
-            this.$watch(value, function (val, newVal) {
-                el.textContent = newVal
+            new Directives('text', el, this, {
+                val: value
             })
             before(el, text)
         } else {

@@ -10,9 +10,11 @@ class Directive {
 }
 
 export default function install (name, hook, vm) {
-    let dir = new Directive(name)
+    let dir = {
+        name: name
+    }
     Object.keys(hook).forEach(type => {
-        dir.__proto__[type] = hook[type]
+        dir[type] = hook[type]
     })
     return dir
 }

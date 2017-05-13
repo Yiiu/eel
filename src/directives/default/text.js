@@ -4,7 +4,10 @@
 export default function (Eel) {
     Eel.directives('text', {
         bind: function () {
-            console.log(1)
+            this.el.textContent = this.getter()
+        },
+        update: function (val, newVal) {
+            this.el.textContent = newVal
         }
     })
 }
