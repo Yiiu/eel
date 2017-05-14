@@ -1,13 +1,14 @@
 /**
  * Created by yuer on 2017/5/6.
  */
-import { parseDom, before, remove } from '../util/dom'
+import { parseDom, before, remove, replace } from '../util/dom'
 import Directives from '../directives/index'
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g    // tag
 const directivesRE = /^v-(\w+)/                 // 匹配指令名称
 const dirREM = /v-(.*)/                         // 匹配指令名称后面的值
-export function parseHTML () {
-    let tpl = this.$template.innerHTML
+const componentRE = /<([\w:-]+)+/
+export function parseHTML (el) {
+    let tpl = parseTemplate(this.$option.template)
     if (typeof(tpl) === 'string') {
         tpl = parseDom(tpl)
     }
@@ -15,15 +16,37 @@ export function parseHTML () {
         console.error('需要根节点')
     }
     this._compileNode(tpl)
-    this.$el.appendChild(tpl)
-    this.$template.innerHTML = ''
+    el.appendChild(tpl)
+    return tpl
+}
+/**
+ * 处理options的template
+ * @param template
+ */
+export function parseTemplate (template) {
+    if (!template) return null
+    if (typeof(template) === 'string') {
+        if (template[0] === '#') {
+            return document.querySelector(template).innerHTML
+        } else {
+            return template
+        }
+    } else {
+        return template.innerHTML
+    }
 }
 /**
  * 处理模板节点
  */
 export function compileNode (html) {
     if (html.nodeType === 1) {
-        this._compileDomNode(html)
+        let components = this.__proto__.constructor.options.components
+        let tag = componentRE.exec(html.outerHTML)[1]
+        if (components[tag]) {
+            this._compileComponentNode(html, components[tag])
+        } else {
+            this._compileDomNode(html)
+        }
     } else if (html.nodeType === 3) {
         if (html.data === '\n') {
             return
@@ -31,7 +54,12 @@ export function compileNode (html) {
         this._compileTextNode(html)
     }
 }
-
+export function compileComponentNode (html, component) {
+    const fragment = document.createDocumentFragment()
+    let sub = component.$mount(fragment, this)
+    replace(html, fragment)
+    html.attributes
+}
 export function compileDir (attr, dom) {
     let name = directivesRE.exec(attr.name)[1]
     let tag = dirREM.exec(attr.name)[1]

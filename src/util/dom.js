@@ -9,6 +9,7 @@ export function replace (el, tar) {
         el.parentNode.appendChild(tar)
     }
     el.parentNode.removeChild(el)
+    return el
 }
 
 export function parseDom (arg) {

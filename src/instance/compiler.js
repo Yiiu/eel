@@ -8,7 +8,5 @@ export function compilerMixin (Eel) {
     Eel.prototype._compileNode = parse.compileNode
     Eel.prototype._compileDomNode = parse.compileDomNode
     Eel.prototype._compileTextNode = parse.compileTextNode
-    Eel.prototype.component = function (name, op) {
-        console.log(name)
-    }
+    Eel.prototype._compileComponentNode = parse.compileComponentNode
 }

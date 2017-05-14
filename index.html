@@ -28,17 +28,25 @@
             <h3 class="title">You name is:{{input}}</h3>
             <input class="input" type="text" v-model="input">
             <button class="btn" v-on:click="handleClick">Click!</button>
+            <test v-if="show"></test>
             <div class="miaow" v-if="show">
                 <a href="//www.github.com/yiiu">Yiiu</a>
             </div>
         </main>
     </div>
 </script>
+<script type="text/x-template" id="test">
+<div>
+    2
+</div>
+</script>
 <!-- 开发环境请把下面的注释去掉↓ -->
 <script src="http://localhost:35729/livereload.js?snipver=1"></script>
 <script src="./dist/js/eel.js"></script>
 <script>
-    Eel.component('test')
+    Eel.component('test', {
+        template: '<div>A custom component!</div>',
+    })
     let a = new Eel({
         el: '#el',
         template: '#template',
@@ -52,6 +60,12 @@
             handleClick () {
                 this.show = !this.show
             }
+        },
+        created () {
+            console.log('--created--')
+        },
+        mounted () {
+            console.log('--mounted--')
         }
     })
 </script>
