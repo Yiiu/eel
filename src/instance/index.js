@@ -3,6 +3,10 @@
  */
 import { initMixin } from './init'
 import { stateMixin } from './state'
+import { directivesMixin } from './directives'
+import { compilerMixin } from './compiler'
+
+import dataApi from './api/data'
 
 function Eel (options) {
     if (!this instanceof Eel) {
@@ -10,6 +14,15 @@ function Eel (options) {
     }
     this._init(options)
 }
+Eel.component = function (name) {
+    console.log(name)
+}
+// Mixin
 initMixin(Eel)
 stateMixin(Eel)
+directivesMixin(Eel)
+compilerMixin(Eel)
+// api
+dataApi(Eel)
+
 export default Eel

@@ -35,10 +35,11 @@
     </div>
 </script>
 <!-- 开发环境请把下面的注释去掉↓ -->
-<!-- <script src="http://localhost:35729/livereload.js?snipver=1"></script> -->
+<script src="http://localhost:35729/livereload.js?snipver=1"></script>
 <script src="./dist/js/eel.js"></script>
 <script>
-    let a = new eel({
+    Eel.component('test')
+    let a = new Eel({
         el: '#el',
         template: '#template',
         data: {

@@ -19,7 +19,7 @@ module.exports =  {
     dest: 'dist/js/eel.js',
     format: 'umd',
     sourceMap: 'inline',
-    moduleName: 'eel',
+    moduleName: 'Eel',
     plugins: plugins,
     banner: 
 `/**

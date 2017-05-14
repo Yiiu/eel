@@ -2,17 +2,13 @@
  * Created by yuer on 2017/5/6.
  */
 import * as parse from '../compiler/index'
-export function initCompiler (vm) {
-    vm.$root = {}
-    vm.$el = document.querySelector(vm.$option.el)
-    vm.$root.$el = document.querySelector(vm.$option.el)
-    let t = vm.$root.$tplDom = document.querySelector(vm.$option.template || vm.$option.el)
-    vm.$root.$template = t.innerHTML
-    vm.__proto__._parseHTML = parse.parseHTML
-    vm.__proto__._compileDir = parse.compileDir
-    vm.__proto__._compileNode = parse.compileNode
-    vm.__proto__._compileDomNode = parse.compileDomNode
-    vm.__proto__._compileTextNode = parse.compileTextNode
-    vm.$root.$tplDom.innerHTML = ''
-    vm._parseHTML(vm.$el)
+export function compilerMixin (Eel) {
+    Eel.prototype._parseHTML = parse.parseHTML
+    Eel.prototype._compileDir = parse.compileDir
+    Eel.prototype._compileNode = parse.compileNode
+    Eel.prototype._compileDomNode = parse.compileDomNode
+    Eel.prototype._compileTextNode = parse.compileTextNode
+    Eel.prototype.component = function (name, op) {
+        console.log(name)
+    }
 }

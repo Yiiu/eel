@@ -6,9 +6,8 @@ import Directives from '../directives/index'
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g    // tag
 const directivesRE = /^v-(\w+)/                 // 匹配指令名称
 const dirREM = /v-(.*)/                         // 匹配指令名称后面的值
-export function parseHTML (el) {
-    let fragment = document.createDocumentFragment()
-    let tpl = this.$root.$template
+export function parseHTML () {
+    let tpl = this.$template.innerHTML
     if (typeof(tpl) === 'string') {
         tpl = parseDom(tpl)
     }
@@ -17,6 +16,7 @@ export function parseHTML (el) {
     }
     this._compileNode(tpl)
     this.$el.appendChild(tpl)
+    this.$template.innerHTML = ''
 }
 /**
  * 处理模板节点

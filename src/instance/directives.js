@@ -2,12 +2,12 @@
  * Created by yuer on 2017/5/12.
  */
 import install from '../directives/intall'
-import defaultInstallDirectives from '../directives/default/index'
-export function initDirectives (vm) {
-    vm.__proto__.directives = installDirectives
-    vm.$directives = {}
-    defaultInstallDirectives(vm)
+
+// 初始化指令的一些设置
+export  function directivesMixin (Eel) {
+    Eel.prototype.directives = installDirectives
 }
+// install 指令
 function installDirectives (name, hook) {
     let dir = install(name, hook)
     if (this.$directives[name]) {

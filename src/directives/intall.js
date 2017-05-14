@@ -9,7 +9,7 @@ class Directive {
     }
 }
 
-export default function install (name, hook, vm) {
+export default function install (name, hook) {
     let dir = {
         name: name
     }

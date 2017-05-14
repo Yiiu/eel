@@ -45,4 +45,4 @@ const eventHandler = (event, filename) => {
 
 
 watcherDefault.on('event', event => eventHandler(event, config.dest))
-lrserver.watch([relative('../dist'), relative('../docs'),  relative('../')])
+lrserver.watch([relative('../dist'), relative('../docs')])
