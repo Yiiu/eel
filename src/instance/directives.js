@@ -10,10 +10,10 @@ export  function directivesMixin (Eel) {
 // install 指令
 function installDirectives (name, hook) {
     let dir = install(name, hook)
-    if (this.$directives[name]) {
+    if (this.$option.directives[name]) {
         console.error(`已经存在${name}指令`)
     } else {
-        this.$directives[name] = dir
+        this.$option.directives[name] = dir
     }
     return this
 }

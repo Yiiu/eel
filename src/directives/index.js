@@ -16,10 +16,11 @@ export default class Directives {
         this.vm = vm            //
         this.arg = ''           // 参数
         this.val = text.val
-        this._name = text.name
+        this.literal = text.literal
+        this._name = text.name  // 指令全名
         this.modifiers = {}     // 修饰符
         this.compile(text)
-        extend(this, this.vm.$directives[name])
+        extend(this, this.vm.$option.directives[name])
         this._init()
     }
 
@@ -48,10 +49,12 @@ export default class Directives {
      * 用户初始时获取数据值
      */
     getter () {
+        if (!this.val) return
         let get = parsePath(this.val)
         return get(this.vm)
     }
     setter (val) {
+        if (!this.val) return
         let set = setData(this.val)
         return set(this.vm, val)
     }
@@ -62,6 +65,7 @@ export default class Directives {
         if (this.literal) {
             this.update && this.update()
         } else {
+            if (!this.val) return
             this.vm.$watch(this.val, (val, newVal) => {
                 this.update && this.update(val, newVal)
             })

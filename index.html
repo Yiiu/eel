@@ -37,7 +37,7 @@
 </script>
 <script type="text/x-template" id="test">
 <div>
-    2
+    <div class="test"></div>
 </div>
 </script>
 <!-- 开发环境请把下面的注释去掉↓ -->
@@ -45,7 +45,7 @@
 <script src="./dist/js/eel.js"></script>
 <script>
     Eel.component('test', {
-        template: '<div>A custom component!</div>',
+        template: '<div>A custom component!</div>'
     })
     let a = new Eel({
         el: '#el',

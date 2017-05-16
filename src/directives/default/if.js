@@ -5,6 +5,9 @@ import { replace } from '../../util/dom'
 export default function (Eel) {
     Eel.directives('if', {
         bind () {
+            if (this.vm._isComponent) {
+                this.vm = this.vm.$parent
+            }
             let val = this.getter()
             let Pla = this._Pla = document.createComment('(●ˇ∀ˇ●)')
             this._el = this.el

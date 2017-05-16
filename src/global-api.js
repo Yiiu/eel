@@ -3,21 +3,26 @@
  */
 let cid = 0
 export default function (Eel) {
+    Eel.options = {
+        components: {}
+    }
+    Eel.version = '0.1'
     Eel.extend = function (options) {
-        let that = this
-        let Sub = function (options) {
-            this._init()
-        }
-        Sub.prototype = Object.create(Eel.prototype)
+        let Super = this
+        let Sub = creatClass()
+        Sub.prototype = Object.create(Super.prototype)
         Sub.prototype.constructor = Sub
-        this.options = {
-            components: {}
-        }
-        Sub.extend = that.extend
+        Sub.options = options
         return Sub
+    }
+    function creatClass () {
+        return new Function(
+            'return function EelComponent (options) {this._init(options);}'
+        )()
     }
     Eel.component = function (name, options) {
         options = options || {}
+        let Sub
         options.name = name
         options._isComponent = true
         options = Eel.extend(options)

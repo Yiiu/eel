@@ -40,10 +40,10 @@ export function parseTemplate (template) {
  */
 export function compileNode (html) {
     if (html.nodeType === 1) {
-        let components = this.__proto__.constructor.options.components
-        let tag = componentRE.exec(html.outerHTML)[1]
+        let components = this.$option.components
+        let tag = html.tagName.toLowerCase()
         if (components[tag]) {
-            this._compileComponentNode(html, components[tag])
+            this._compileComponentNode(html, tag)
         } else {
             this._compileDomNode(html)
         }
@@ -54,11 +54,11 @@ export function compileNode (html) {
         this._compileTextNode(html)
     }
 }
-export function compileComponentNode (html, component) {
-    const fragment = document.createDocumentFragment()
-    let sub = component.$mount(fragment, this)
-    replace(html, fragment)
-    html.attributes
+export function compileComponentNode (html, tag) {
+    new Directives('component', html, this, {
+        literal: true,
+        name: tag
+    })
 }
 export function compileDir (attr, dom) {
     let name = directivesRE.exec(attr.name)[1]
